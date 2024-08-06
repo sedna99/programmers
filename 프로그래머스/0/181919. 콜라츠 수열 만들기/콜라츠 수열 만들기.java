@@ -1,21 +1,10 @@
-import java.util.ArrayList;
-import java.util.List;
+import java.util.stream.IntStream;
 
 class Solution {
     public int[] solution(int n) {
-        ArrayList<Integer> list = new ArrayList<Integer>();
-        list.add(n);
-        while(n != 1) {
-        switch (n%2) {
-            case 0:
-                n=n/2;
-                break;
-            case 1:
-                n=3*n+1;
-                break;
-        }
-            list.add(n);
-        }
-        return list.stream().mapToInt(i->i).toArray();
+        return IntStream.concat(
+            IntStream.iterate(n, i -> i != 1, i -> i%2 == 0 ? i/2 : 3*i + 1),
+            IntStream.of(1)
+        ).toArray();
     }
 }
