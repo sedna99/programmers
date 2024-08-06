@@ -1,20 +1,22 @@
-import java.util.ArrayList;
-import java.util.List;
+import java.util.ArrayDeque;
 
 class Solution {
     public int[] solution(int[] arr) {
-        List<Integer> stk = new ArrayList<Integer>();
+        ArrayDeque<Integer> stk = new ArrayDeque<Integer>();
         int i = 0;
-        while(i < arr.length) {
-            if(stk.size() == 0 || stk.get(stk.size() - 1) < arr[i]) {
-                stk.add(arr[i]);
-                i++;
-                continue;
-            }
-            else if(stk.get(stk.size() - 1) >= arr[i]) {
-                stk.remove(stk.size() - 1);
-            }
+        for(Integer num : arr){
+            while(i < arr.length) {
+                if(stk.size() == 0 || stk.peekLast() < arr[i]) {
+                    stk.addLast(arr[i]);
+                    i++;
+                    continue;
+                }
+                else if(stk.peekLast() >= arr[i]) {
+                    stk.pollLast();
+                }
+            }            
         }
+        
         return stk.stream().mapToInt(j -> j).toArray();
     }
 }
