@@ -1,5 +1,6 @@
 class Solution {
     public String solution(String new_id) {
+        System.out.println(new_id.length());
         return step7(step6(step5(step4(step3(step2(step1(new_id)))))));
     }
 
@@ -16,7 +17,7 @@ class Solution {
     }
 
     public String step4(String before) {
-        return before.replaceAll("^\\.", "").replaceAll("\\.$", "");
+        return before.replaceAll("^[.]|[.]$", "");
     }
 
     public String step5(String before) {
